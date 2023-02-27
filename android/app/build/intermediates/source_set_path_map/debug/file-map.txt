@@ -23,3 +23,5 @@ com.jikhon.app-mergeDebugResources-21 C:\Users\dholl\Documents\Projets\Jikhon\ji
 com.jikhon.app-merged_res-22 C:\Users\dholl\Documents\Projets\Jikhon\jikhon\Jikhon\android\app\build\intermediates\merged_res\debug
 com.jikhon.app-debug-23 C:\Users\dholl\Documents\Projets\Jikhon\jikhon\Jikhon\android\app\src\debug\res
 com.jikhon.app-main-24 C:\Users\dholl\Documents\Projets\Jikhon\jikhon\Jikhon\android\app\src\main\res
+com.jikhon.app-packaged_res-25 C:\Users\dholl\Documents\Projets\Jikhon\jikhon\Jikhon\node_modules\react-native-safe-area-context\android\build\intermediates\packaged_res\debug
+com.jikhon.app-packaged_res-26 C:\Users\dholl\Documents\Projets\Jikhon\jikhon\Jikhon\node_modules\react-native-vector-icons\android\build\intermediates\packaged_res\debug
