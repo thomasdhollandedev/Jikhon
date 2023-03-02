@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "865902810099",
+    "project_id": "jikhon",
+    "storage_bucket": "jikhon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865902810099:android:672606a41b931e439fb886",
+        "android_client_info": {
+          "package_name": "com.jikhon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd0p5njE75BCyJdmNhfBriMDQVtsp68A4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
