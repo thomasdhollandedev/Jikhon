@@ -10,12 +10,12 @@ import {
   Image
 } from 'react-native';
 import auth from "@react-native-firebase/auth";
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+// import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 //Configuration
-GoogleSignin.configure({
-  webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
-});
+// GoogleSignin.configure({
+//   webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
+// });
 //Fin configuration
 
 const SignUp = (props) => {
@@ -47,27 +47,27 @@ const SignUp = (props) => {
   //Fin création de compte via email
 
   //Création de compte via google
-  async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
+  // async function onGoogleButtonPress() {
+  //   // Check if your device supports Google Play
+  //   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+  //   // Get the users ID token
+  //   const { idToken } = await GoogleSignin.signIn();
 
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  //   // Create a Google credential with the token
+  //   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-    // Sign-in the user with the credential
-    return auth()
-      .signInWithCredential(googleCredential)
-      .then(() => {
-        console.log('Compte créé!');
-        props.navigation.navigate('Home')
-      })
-      .catch(error => {
-        console.error(error);
-        Alert(error);
-      });
-  }
+  //   // Sign-in the user with the credential
+  //   return auth()
+  //     .signInWithCredential(googleCredential)
+  //     .then(() => {
+  //       console.log('Compte créé!');
+  //       props.navigation.navigate('Home')
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //       Alert(error);
+  //     });
+  // }
   //Fin création de compte via google
 
   return (

@@ -10,12 +10,12 @@ import {
   Image
 } from 'react-native';
 import auth from "@react-native-firebase/auth";
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+// import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 //Configuration
-GoogleSignin.configure({
-  webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
-});
+// GoogleSignin.configure({
+//   webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
+// });
 //Fin configuration
 
 const Login = (props) => {
@@ -54,31 +54,31 @@ const Login = (props) => {
   //Fin connexion
 
   //Connexion via google
-  async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
-    console.log('dans la fonction');
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    console.log('après GoogleSignin');
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
-    console.log('idToken :' + idToken);
+  // async function onGoogleButtonPress() {
+  //   // Check if your device supports Google Play
+  //   console.log('dans la fonction');
+  //   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+  //   console.log('après GoogleSignin');
+  //   // Get the users ID token
+  //   const { idToken } = await GoogleSignin.signIn();
+  //   console.log('idToken :' + idToken);
 
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    console.log('googleCredential :' + googleCredential);
+  //   // Create a Google credential with the token
+  //   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  //   console.log('googleCredential :' + googleCredential);
 
-    // Sign-in the user with the credential
-    return auth()
-      .signInWithCredential(googleCredential)
-      .then(() => {
-        console.log('Utilisateur connecté!');
-        props.navigation.navigate('Home')
-      })
-      .catch(error => {
-        console.error(error);
-        Alert(error);
-      });
-  }
+  //   // Sign-in the user with the credential
+  //   return auth()
+  //     .signInWithCredential(googleCredential)
+  //     .then(() => {
+  //       console.log('Utilisateur connecté!');
+  //       props.navigation.navigate('Home')
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //       Alert(error);
+  //     });
+  // }
   //Fin Connexion via google
 
   return (
