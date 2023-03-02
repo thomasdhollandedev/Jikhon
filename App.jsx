@@ -3,10 +3,12 @@ import { View, Text } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //import auth from '@react-native-firebase/auth';
-import Login from './src/components/Login/Login.page'
-import SignUp from './src/components/SignUp/SignUp.page'
-import Home from './src/components/Home/Home.page'
-// import Profil from './src/components/Profil/Profil.page';
+import SignIn from './src/pages/SignIn/SignIn.page'
+import SignUp from './src/pages/SignUp/SignUp.page'
+import Home from './src/pages/Home/Home.page'
+// import Profil from './src/pages/Profil/Profil.page';
+import store from './src/redux/store';
+import { Provider } from 'react-redux';
 
 
 /*
@@ -32,14 +34,16 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} options={{title:'', headerShown: false}}/>
-        <Stack.Screen name="SignUp" component={SignUp} options={{title:'', headerShown: false}}/>
-        <Stack.Screen name="Home" component={Home} options={{title:'', headerShown: false}}/>
-        {/* <Stack.Screen name="Profil" component={Profil} options={{title:''}}/> */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SignIn">
+          <Stack.Screen name="SignIn" component={SignIn} options={{ title: '', headerShown: false }} />
+          <Stack.Screen name="SignUp" component={SignUp} options={{ title: '', headerShown: false }} />
+          <Stack.Screen name="Home" component={Home} options={{ title: '', headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+
   );
 }
 

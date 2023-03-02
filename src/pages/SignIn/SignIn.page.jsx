@@ -7,73 +7,31 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
-  Image
+  Image,
+  Pressable
 } from 'react-native';
 import auth from "@react-native-firebase/auth";
-// import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import Sign from '../../helpers/Sign/Sign.helper';
 
-//Configuration
-// GoogleSignin.configure({
-//   webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
-// });
-//Fin configuration
+const SignIn = ({navigation}) => {
 
-const SignUp = (props) => {
-
-  //Création de compte via email
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSignUp = () => {
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('Compte créé!');
-        props.navigation.navigate('Home')
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+  useEffect(() => {
+    Sign._isUserAuthenticated(handleSuccess);
+  }, []);
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
-        console.error(error);
-        Alert(error);
-      });
+  const handleSuccess = () => {
+    navigation.navigate('Home');
   }
-  //Fin création de compte via email
-
-  //Création de compte via google
-  // async function onGoogleButtonPress() {
-  //   // Check if your device supports Google Play
-  //   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-  //   // Get the users ID token
-  //   const { idToken } = await GoogleSignin.signIn();
-
-  //   // Create a Google credential with the token
-  //   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-  //   // Sign-in the user with the credential
-  //   return auth()
-  //     .signInWithCredential(googleCredential)
-  //     .then(() => {
-  //       console.log('Compte créé!');
-  //       props.navigation.navigate('Home')
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //       Alert(error);
-  //     });
-  // }
-  //Fin création de compte via google
 
   return (
 
     <View style={styles.container}>
+
       <Text style={styles.textIntroduction}>Bienvenue sur Jikhon !</Text>
+
       <TextInput
         style={styles.input}
         placeholder='E-mail'
@@ -82,7 +40,9 @@ const SignUp = (props) => {
         value={email}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
+        keyboardType='email-address'
       />
+
       <TextInput
         style={styles.input}
         placeholderTextColor="#aaaaaa"
@@ -93,25 +53,30 @@ const SignUp = (props) => {
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
+
       <TouchableOpacity
         style={styles.button}
-        onPress={async () => onSignUp()}>
-        <Text style={styles.buttonTitle}>Créer un compte</Text>
+        onPress={() => Sign.onSignIn(email,password,handleSuccess)}
+      >
+        <Text style={styles.buttonTitle}>Se connecter</Text>
       </TouchableOpacity>
+
       <View style={styles.footerView}>
-        <Text style={styles.footerText}>Déjà un compte? <Text onPress={() => props.navigation.navigate('Login')} style={styles.footerLink}>Se connecter</Text></Text>
+        <Text style={styles.footerText}>Nouveau ? <Text onPress={() => navigation.navigate('SignUp')} style={styles.footerLink}>S'inscrire</Text></Text>
       </View>
+
       <View style={styles.bottomContent}>
-        <TouchableOpacity style={styles.googleButton} onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}>
+        <TouchableOpacity style={styles.googleButton} onPress={() => onGoogleButtonPress().then(() => console.log('Connecté avec google !'))}>
           <Image
             style={styles.googleIcon}
             source={{
               uri: "https://i.ibb.co/j82DCcR/search.png",
             }}
           />
-          <Text style={styles.googleButtonText}>Sign in with Google</Text>
+          <Text style={styles.googleButtonText}>Sign up with Google</Text>
         </TouchableOpacity>
       </View>
+
     </View>
   );
 }
@@ -201,4 +166,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUp;
+export default SignIn;

@@ -34,7 +34,7 @@ const Home = (props) => {
         props.navigation.navigate('Home');
     } else {
         console.log("L'utilisateur n'est pas connecté");
-        props.navigation.navigate('Login');
+        props.navigation.navigate('SignIn');
     }
 
     //Bouton de déconnexion
@@ -43,11 +43,11 @@ const Home = (props) => {
             .signOut()
             .then(() => {
                 console.log('User signed out!');
-                props.navigation.navigate('Login');
+                props.navigation.navigate('SignIn');
             })
             .catch(error => {
                 console.error(error);
-                Alert(error);
+                alert(error);
               });
     };
 

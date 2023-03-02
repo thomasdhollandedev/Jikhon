@@ -10,6 +10,7 @@ import {
   Image
 } from 'react-native';
 import auth from "@react-native-firebase/auth";
+import Sign from '../../helpers/Sign/Sign.helper';
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 //Configuration
@@ -18,68 +19,15 @@ import auth from "@react-native-firebase/auth";
 // });
 //Fin configuration
 
-const Login = (props) => {
+const SignUp = ({navigation}) => {
 
+  //Création de compte via email
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  //Vérifier si un utilisateur est déjà connecté
-  useEffect(() => {
-    _isUserAuthenticated();
-  }, []);
-
-  const _isUserAuthenticated = () => {
-    if (auth().currentUser) {
-      console.log("L'utilisateur est déjà connecté, son id est: ", auth().currentUser.uid);
-      props.navigation.navigate('Home');
-    } else {
-      console.log("L'utilisateur n'est pas connecté");
-    }
-  };
-
-  //Connexion
-  const onLoginPress = () => {
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        const uid = response.user.uid;
-        console.log("L'utilisateur est connecté, son id est: ", uid);
-        props.navigation.navigate('Home')
-      })
-      .catch(error => {
-        console.error(error);
-        Alert(error);
-      });
+  const handleSuccess = () => {
+    navigation.navigate('Home');
   }
-  //Fin connexion
-
-  //Connexion via google
-  // async function onGoogleButtonPress() {
-  //   // Check if your device supports Google Play
-  //   console.log('dans la fonction');
-  //   await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-  //   console.log('après GoogleSignin');
-  //   // Get the users ID token
-  //   const { idToken } = await GoogleSignin.signIn();
-  //   console.log('idToken :' + idToken);
-
-  //   // Create a Google credential with the token
-  //   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  //   console.log('googleCredential :' + googleCredential);
-
-  //   // Sign-in the user with the credential
-  //   return auth()
-  //     .signInWithCredential(googleCredential)
-  //     .then(() => {
-  //       console.log('Utilisateur connecté!');
-  //       props.navigation.navigate('Home')
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //       Alert(error);
-  //     });
-  // }
-  //Fin Connexion via google
 
   return (
 
@@ -106,21 +54,21 @@ const Login = (props) => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => onLoginPress()}>
-        <Text style={styles.buttonTitle}>Se connecter</Text>
+        onPress={() => Sign.onSignUp(email, password, handleSuccess)}>
+        <Text style={styles.buttonTitle}>Créer un compte</Text>
       </TouchableOpacity>
       <View style={styles.footerView}>
-        <Text style={styles.footerText}>Pas de compte? <Text onPress={() => props.navigation.navigate('SignUp')} style={styles.footerLink}>Créer un compte</Text></Text>
+        <Text style={styles.footerText}>Déjà un compte? <Text onPress={() => navigation.navigate('SignIn')} style={styles.footerLink}>Se connecter</Text></Text>
       </View>
       <View style={styles.bottomContent}>
-        <TouchableOpacity style={styles.googleButton} onPress={() => onGoogleButtonPress().then(() => console.log('Connecté avec google !'))}>
+        <TouchableOpacity style={styles.googleButton} onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}>
           <Image
             style={styles.googleIcon}
             source={{
               uri: "https://i.ibb.co/j82DCcR/search.png",
             }}
           />
-          <Text style={styles.googleButtonText}>Sign up with Google</Text>
+          <Text style={styles.googleButtonText}>Sign in with Google</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -212,4 +160,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default SignUp;
