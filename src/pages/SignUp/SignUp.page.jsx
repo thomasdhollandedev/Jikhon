@@ -3,6 +3,7 @@ import React from 'react'
 import darkStyle from '../../assets/styles/darkStyle'
 import TitleSectionSignUp from '../../components/SignUp/TitleSectionSignUp.component'
 import FormSectionSignUp from '../../components/SignUp/FormSectionSignUp.component'
+import LinkSectionSignUp from '../../components/SignUp/LinkSectionSignUp.component'
 
 const SignUp = () => {
   return (
@@ -14,6 +15,7 @@ const SignUp = () => {
     >
       <TitleSectionSignUp />
       <FormSectionSignUp />
+      <LinkSectionSignUp />
     </View>
   )
 }

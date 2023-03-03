@@ -5,12 +5,13 @@ import darkStyle from '../../../assets/styles/darkStyle'
 import { Button } from 'react-native-paper'
 import { StyleSheet, View } from 'react-native'
 
-const CustomButton = ({ textButton = '', primary = true, disable = false, actionFunction = () => { } }, additionalStyle = {}) => {
+const CustomButton = ({ textButton = '', primary = true, disable = false, actionFunction = () => { }, additionalStyleView = {}, additionalStyleButton = {} }) => {
   return (
     <View style={[
       styles.view,
       primary ? darkStyle.primaryBtnShadow : darkStyle.secondaryBtnShadow,
-      ]}>
+      additionalStyleView
+    ]}>
       <Button
         uppercase
         textColor={
@@ -18,13 +19,13 @@ const CustomButton = ({ textButton = '', primary = true, disable = false, action
         }
         style={
           [
-            // primary ? darkStyle.primaryElement__BG : darkStyle.secondaryElement__BG,
+            primary ? darkStyle.primaryElement__BG : darkStyle.secondaryElement__BG,
             {
               borderRadius: 10,
               width: '100%',
               height: 40,
             },
-            additionalStyle
+            additionalStyleButton
           ]
         }
         labelStyle={global.textButton}
