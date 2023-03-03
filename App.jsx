@@ -1,46 +1,66 @@
 import React from 'react';
-import { View, Text } from "react-native";
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-//import auth from '@react-native-firebase/auth';
-import Login from './src/components/Login/Login.page'
-import SignUp from './src/components/SignUp/SignUp.page'
-import Home from './src/components/Home/Home.page'
-// import Profil from './src/components/Profil/Profil.page';
-
-
-/*
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-*/
-/*
-const testFirebaseAuthAnonymous = async () => {
-  try {
-    const userCredential = await auth().signInAnonymously();
-    console.log('Connected to Firebase anonymously with user ID:', userCredential.user.uid);
-  } catch (e: any) {
-    console.error('Failed to connect to Firebase:', e.message);
-  }
-};
-
-testFirebaseAuthAnonymous();
-*/
+import HomeUnauth from './src/pages/Unauth/HomeUnauth.page';
+import SignIn from './src/pages/SignIn/SignIn.page';
+import SignUp from './src/pages/SignUp/SignUp.page';
+import darkStyle from './src/assets/styles/darkStyle';
+import ArrowBack from './src/assets/icons/arrowBack.svg'
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+const Logo = () => {
+  return (
+    <TouchableOpacity>
+      <Image
+        style={styles.logo}
+        source={require('./src/assets/images/logo/logo_jikhon_yellow.png')}
+      />
+    </TouchableOpacity>
+  )
+}
+
+const options = ({ navigation }) => ({
+  headerStyle: styles.headerBar,
+  headerTintColor: darkStyle.primaryText__VAR,
+  headerTitle: "",
+  headerLeft: () => <ArrowBack onPress={() => navigation.goBack()} />,
+  headerRight: () => <Logo />
+})
+
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} options={{title:'', headerShown: false}}/>
-        <Stack.Screen name="SignUp" component={SignUp} options={{title:'', headerShown: false}}/>
-        <Stack.Screen name="Home" component={Home} options={{title:'', headerShown: false}}/>
-        {/* <Stack.Screen name="Profil" component={Profil} options={{title:''}}/> */}
+      <Stack.Navigator initialRouteName="UnauthHome">
+        <Stack.Screen
+          name='UnauthHome'
+          component={HomeUnauth}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='SignIn'
+          component={SignIn}
+          options={options}
+        />
+        <Stack.Screen
+          name='SignUp'
+          component={SignUp}
+          options={options}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  headerBar: {
+    backgroundColor: darkStyle.primaryBackground__VAR,
+  },
+  logo: {
+    width: 40,
+    height: 40
+  }
+})
 
 export default App;

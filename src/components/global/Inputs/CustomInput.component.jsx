@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextInput } from 'react-native-paper';
 import darkStyle from '../../../assets/styles/darkStyle';
 import global from '../../../assets/styles/global';
+import { StyleSheet } from 'react-native';
 
 const CustomInput = ({ labelInput = "", valueInput = "", isPasswordInput = false, additionalStyle = {} }) => {
     const [text, setText] = useState(valueInput)
@@ -30,14 +31,11 @@ const CustomInput = ({ labelInput = "", valueInput = "", isPasswordInput = false
                 isPasswordInput ? !isVisible : isPasswordInput
             }
             error={false}
+            outlineStyle={styles.outlineStyle}
             style={
                 [
                     global.textInput,
-                    {
-                        width: '80%',
-                        backgroundColor: darkStyle.primaryBackground__VAR,
-                        borderRadius: 10,
-                    },
+                    styles.input,
                     additionalStyle
                 ]
             }
@@ -45,5 +43,15 @@ const CustomInput = ({ labelInput = "", valueInput = "", isPasswordInput = false
         />
     )
 }
+
+const styles = StyleSheet.create({
+    input: {
+        width: '80%',
+        backgroundColor: darkStyle.primaryBackground__VAR
+    },
+    outlineStyle: {
+        borderRadius: 10
+    }
+})
 
 export default CustomInput

@@ -2,11 +2,11 @@ import React from 'react'
 import CustomInput from '../../components/global/Inputs/CustomInput.component'
 import CustomButton from '../../components/global/Buttons/CustomButton.component'
 import { ImageBackground, View } from 'react-native'
-import TopSectionUnauth from '../../components/unauth/TopSectionUnauth.component'
-import MiddleSectionUnauth from '../../components/unauth/MiddleSectionUnauth.component'
-import BottomSectionUnauth from '../../components/unauth/BottomSectionUnauth.component'
+import TopSectionUnauth from '../../components/Unauth/TopSectionUnauth.component'
+import MiddleSectionUnauth from '../../components/Unauth/MiddleSectionUnauth.component'
+import BottomSectionUnauth from '../../components/Unauth/BottomSectionUnauth.component'
 
-const HomeUnauth = () => {
+const HomeUnauth = ({navigation}) => {
   return (
     <View>
       <ImageBackground
@@ -25,7 +25,7 @@ const HomeUnauth = () => {
       >
         <TopSectionUnauth />
         <MiddleSectionUnauth />
-        <BottomSectionUnauth />
+        <BottomSectionUnauth navigation={navigation} />
       </ImageBackground>
     </View>
   )
