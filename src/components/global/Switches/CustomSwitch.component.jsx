@@ -1,20 +1,40 @@
-import { View, Text } from 'react-native'
+import { View, Text, Switch, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import { Switch } from 'react-native-paper'
 import darkStyle from '../../../assets/styles/darkStyle'
 
-const CustomSwitch = (switchOn = false) => {
+const CustomSwitch = ({ switchOn = false, text = null }) => {
     const [isSwitchOn, setIsSwitchOn] = useState(switchOn)
 
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn)
 
     return (
-        <Switch
-            value={isSwitchOn}
-            onValueChange={onToggleSwitch}
-            color={darkStyle.primaryElement__VAR}
-        />
+        <View style={styles.view}>
+            <Switch
+                value={isSwitchOn}
+                onValueChange={onToggleSwitch}
+                trackColor={{
+                    false: darkStyle.secondaryElement__VAR,
+                    true: darkStyle.primaryElement__VAR
+                }}
+                thumbColor={darkStyle.primaryText__VAR}
+                ios_background={darkStyle.secondaryElement__VAR}
+            />
+            {text !== null &&
+                <Text>{text}</Text>
+            }
+        </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+    view: {
+        width: '80%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    }
+})
 
 export default CustomSwitch
