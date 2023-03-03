@@ -1,4 +1,5 @@
 import auth from "@react-native-firebase/auth";
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const Sign = {
 
@@ -51,6 +52,39 @@ const Sign = {
         } else {
             console.log('Utilisateur non connecté');
         }
+    },
+
+    async onGoogleSign(handleSuccess) {
+        // Check if your device supports Google Play
+        try {
+            const response = await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+            console.log('after GoogleSignin');
+            console.log({GoogleSignin});
+            // Get the users ID token
+            const { idToken } = await GoogleSignin.signIn();
+            console.log('after idToken :' + idToken);
+    
+            // Create a Google credential with the token
+            const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+            console.log('after googleCredential');
+    
+            // Sign-in the user with the credential
+            return auth()
+                .signInWithCredential(googleCredential)
+                .then((response) => {
+                    const uid = response.user.uid;
+                    console.log('Utilisateur connecté avec google, id: ', uid);
+                    handleSuccess();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert(error);
+                });
+            
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 }
 

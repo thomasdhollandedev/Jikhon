@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import auth from "@react-native-firebase/auth";
 import Sign from '../../helpers/Sign/Sign.helper';
-// import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 //Configuration
-// GoogleSignin.configure({
-//   webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
-// });
+GoogleSignin.configure({
+  webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
+});
 //Fin configuration
 
 const SignUp = ({navigation}) => {
@@ -61,14 +61,14 @@ const SignUp = ({navigation}) => {
         <Text style={styles.footerText}>Déjà un compte? <Text onPress={() => navigation.navigate('SignIn')} style={styles.footerLink}>Se connecter</Text></Text>
       </View>
       <View style={styles.bottomContent}>
-        <TouchableOpacity style={styles.googleButton} onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}>
+        <TouchableOpacity style={styles.googleButton} onPress={() => Sign.onGoogleSign(handleSuccess).then(() => console.log('Connecté avec google !'))}>
           <Image
             style={styles.googleIcon}
             source={{
               uri: "https://i.ibb.co/j82DCcR/search.png",
             }}
           />
-          <Text style={styles.googleButtonText}>Sign in with Google</Text>
+          <Text style={styles.googleButtonText}>Sign up with Google</Text>
         </TouchableOpacity>
       </View>
     </View>

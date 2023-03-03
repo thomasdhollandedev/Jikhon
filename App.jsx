@@ -7,8 +7,6 @@ import SignIn from './src/pages/SignIn/SignIn.page'
 import SignUp from './src/pages/SignUp/SignUp.page'
 import Home from './src/pages/Home/Home.page'
 // import Profil from './src/pages/Profil/Profil.page';
-import store from './src/redux/store';
-import { Provider } from 'react-redux';
 
 
 /*
@@ -34,7 +32,6 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="SignIn">
           <Stack.Screen name="SignIn" component={SignIn} options={{ title: '', headerShown: false }} />
@@ -42,8 +39,6 @@ function App() {
           <Stack.Screen name="Home" component={Home} options={{ title: '', headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
-    </Provider>
-
   );
 }
 

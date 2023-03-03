@@ -12,8 +12,15 @@ import {
 } from 'react-native';
 import auth from "@react-native-firebase/auth";
 import Sign from '../../helpers/Sign/Sign.helper';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-const SignIn = ({navigation}) => {
+//Configuration
+GoogleSignin.configure({
+  webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
+});
+//Fin configuration
+
+const SignIn = ({ navigation }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +63,7 @@ const SignIn = ({navigation}) => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => Sign.onSignIn(email,password,handleSuccess)}
+        onPress={() => Sign.onSignIn(email, password, handleSuccess)}
       >
         <Text style={styles.buttonTitle}>Se connecter</Text>
       </TouchableOpacity>
@@ -66,14 +73,14 @@ const SignIn = ({navigation}) => {
       </View>
 
       <View style={styles.bottomContent}>
-        <TouchableOpacity style={styles.googleButton} onPress={() => onGoogleButtonPress().then(() => console.log('Connecté avec google !'))}>
+        <TouchableOpacity style={styles.googleButton} onPress={() => Sign.onGoogleSign(handleSuccess).then(() => console.log('Connecté avec google !'))}>
           <Image
             style={styles.googleIcon}
             source={{
               uri: "https://i.ibb.co/j82DCcR/search.png",
             }}
           />
-          <Text style={styles.googleButtonText}>Sign up with Google</Text>
+          <Text style={styles.googleButtonText}>Sign in with Google</Text>
         </TouchableOpacity>
       </View>
 
