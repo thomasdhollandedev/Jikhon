@@ -61,7 +61,7 @@ const Sign = {
             console.log('after GoogleSignin');
             console.log({GoogleSignin});
             // Get the users ID token
-            const { idToken } = await GoogleSignin.signIn();
+            const {idToken} = await GoogleSignin.signIn();
             console.log('after idToken :' + idToken);
     
             // Create a Google credential with the token

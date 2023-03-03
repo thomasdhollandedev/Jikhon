@@ -17,6 +17,8 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 //Configuration
 GoogleSignin.configure({
   webClientId: '865902810099-6nhf0r2nqqelq2rhnlef270haaqq3c2o.apps.googleusercontent.com',
+  offlineAccess: true,
+  // forceCodeForRefreshToken:true,
 });
 //Fin configuration
 
@@ -27,6 +29,8 @@ const SignIn = ({ navigation }) => {
 
   useEffect(() => {
     Sign._isUserAuthenticated(handleSuccess);
+    // GoogleSignin.revokeAccess();
+    // GoogleSignin.signOut();
   }, []);
 
   const handleSuccess = () => {
